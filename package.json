@@ -1,9 +1,9 @@
 {
   "name": "nodebb-plugin-simple-spoiler",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "keywords": [
     "nodebb",
-    "alignment"
+    "spoiler"
   ],
   "license": "MIT",
   "nbbpm": {

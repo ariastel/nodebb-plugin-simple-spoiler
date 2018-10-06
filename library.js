@@ -11,10 +11,15 @@ const composerFormatting = (data, callback) => {
 };
 module.exports.composerFormatting = composerFormatting;
 
-const parsePost = (data, callback) => {
-	var newContent = data.postData.content;
-	newContent = newContent.replace(/\[s\]/gm, '<div class="spoiler-wrapper"><button class="spoiler-control">Spoiler</button><div style="display: none;" class="spoiler-content">');
+const replaceSpoilerContent = (content) => {
+	var newContent = content;
+	newContent = newContent.replace(/\[s(?:=([^\]]*)|)\]/gm, (match, p1) => `<div class="spoiler-wrapper"><button class="spoiler-control">${p1 ? p1 : 'Spoiler'}</button><div style="display: none;" class="spoiler-content">`);
 	newContent = newContent.replace(/\[\/(?:s)\]/gm, '</div></div>');
+	return newContent;
+}
+
+const parsePost = (data, callback) => {
+	var newContent = replaceSpoilerContent(data.postData.content);
 	const newData = { ...data };
 	newData.postData.content = newContent;
 	callback(null, newData);
@@ -22,9 +27,7 @@ const parsePost = (data, callback) => {
 module.exports.parsePost = parsePost;
 
 const parseRaw = (data, callback) => {
-	var newContent = data;
-	newContent = newContent.replace(/\[s\]/gm, '<div class="spoiler-wrapper"><button class="spoiler-control">Spoiler</button><div style="display: none;" class="spoiler-content">');
-	newContent = newContent.replace(/\[\/(?:s)\]/gm, '</div></div>');
+	var newContent = replaceSpoilerContent(data);
 	callback(null, newContent);
 };
 module.exports.parseRaw = parseRaw;
