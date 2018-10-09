@@ -15,7 +15,7 @@ const replaceSpoilerContent = (content) => {
 	var newContent = content;
 	newContent = newContent.replace(/\[s(?:=([^\]]*)|)\]/gm, (match, p1) => `<div class="spoiler-wrapper"><button class="spoiler-control">${p1 ? p1 : 'Spoiler'}</button><div style="display: none;" class="spoiler-content">`);
 
-	newContent = newContent.replace(/\[\/s\](<\/li>\n<\/ol>|)/gm, (match, p1) => `${p1}</div></div>`);
+	newContent = newContent.replace(/\[\/s\](<\/li>\n<\/(?:ol|ul)>|)/gm, (match, p1) => `${p1}</div></div>`);
 	return newContent;
 }
 
