@@ -13,9 +13,11 @@ module.exports.composerFormatting = composerFormatting;
 
 const replaceSpoilerContent = (content) => {
 	var newContent = content;
-	newContent = newContent.replace(/\[s(?:=([^\]]*)|)\]/gm, (match, p1) => `<div class="spoiler-wrapper"><button class="spoiler-control">${p1 ? p1 : 'Spoiler'}</button><div style="display: none;" class="spoiler-content">`);
+	const startSpoiler = new RegExp (/(?:(?<!<code[\s\S]*)|(?<=<\/code[\s\S]*))\[s(?:=([^\]]*)|)\]/gm);
+	const endSpoiler = new RegExp (/(?:(?<!<code[\s\S]*)|(?<=<\/code[\s\S]*))\[\/s\](<\/li>\n<\/(?:ol|ul)>|)/gm);
 
-	newContent = newContent.replace(/\[\/s\](<\/li>\n<\/(?:ol|ul)>|)/gm, (match, p1) => `${p1}</div></div>`);
+	newContent = newContent.replace(startSpoiler, (match, p1) => `<section class="spoiler-wrapper"><button class="spoiler-control">${p1 ? p1 : 'Spoiler'}</button><section style="display: none;" class="spoiler-content">`);
+	newContent = newContent.replace(endSpoiler, (match, p1) => `${p1}</section></section>`);
 	return newContent;
 }
 
