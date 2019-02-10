@@ -13,7 +13,6 @@ module.exports.composerFormatting = composerFormatting;
 
 const replaceSpoilerContent = (content) => {
 	var newContent = content;
-	console.log(newContent);
 	if (newContent.includes('<code')) {
 		const separatedByCodeBlocks = newContent.replace(/<code/gi, "splitme<code").replace(/<\/code>/gi, "<\/code>splitme").split("splitme");
 		const formattedBlocks = separatedByCodeBlocks.map(text => text.includes('<code') ? text : formatSpoiler(text));
@@ -22,7 +21,6 @@ const replaceSpoilerContent = (content) => {
 	else{
 		newContent = formatSpoiler(newContent);
 	}
-	console.log(newContent);
 	return newContent;
 }
 
