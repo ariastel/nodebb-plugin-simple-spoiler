@@ -1,5 +1,8 @@
 {
 	"id": "nodebb-plugin-simple-spoiler",
+	"name": "NodeBB Simple Spoiler",
+	"description": "NodeBB Plugin that displays spoiler",
+	"url": "https://github.com/ariastel/nodebb-plugin-news-posts",
 	"library": "./library.js",
 	"hooks": [
 		{
@@ -17,13 +20,11 @@
 			"priority": 10
 		}
 	],
-	"staticDirs": {
-		"static": "./static"
-	},
 	"less": [
-		"static/style.less"
+		"less/style.less"
 	],
 	"scripts": [
-		"static/main.js"
-	]
+		"client/main.js"
+	],
+	"languages": "languages"
 }
